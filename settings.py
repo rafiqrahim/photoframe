@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'photoframe.urls'
 
-TEMPLATE_DIRS = ('C:/Users/Rafiq/Documents/photoframe/templates',)
+TEMPLATE_DIRS = ('templates/',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

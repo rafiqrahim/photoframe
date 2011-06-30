@@ -1,10 +1,12 @@
 from django.conf.urls.defaults import patterns, include, url
+from photoframe.view import hello
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', hello),
     # Examples:
     # url(r'^$', 'photoframe.views.home', name='home'),
     # url(r'^photoframe/', include('photoframe.foo.urls')),
