@@ -1,12 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
-from photoframe.view import hello
+from photoframe.view import show_pic
+import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', hello),
+    url(r'^$', show_pic),
+    url(r'^pictures/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
     # Examples:
     # url(r'^$', 'photoframe.views.home', name='home'),
     # url(r'^photoframe/', include('photoframe.foo.urls')),
