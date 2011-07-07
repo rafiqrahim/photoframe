@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-from photoframe.view import show_pic
+from photoframe.view import show_pic, slide
 import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -8,7 +8,8 @@ import settings
 
 urlpatterns = patterns('',
     url(r'^$', show_pic),
-    url(r'^pictures/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
+    url(r'^slide$', slide),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
     # Examples:
     # url(r'^$', 'photoframe.views.home', name='home'),
     # url(r'^photoframe/', include('photoframe.foo.urls')),
