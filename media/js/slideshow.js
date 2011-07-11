@@ -42,19 +42,6 @@ NoClickDelay.prototype = {
 };
 new NoClickDelay(document.getElementById('main'));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 var indexh = 0,
     indexv = 0,
     triggerElementID = null, // this variable is used to identity the triggering element
@@ -70,14 +57,21 @@ var indexh = 0,
     minLength = 72, // the shortest distance the user may swipe
     swipeLength = 0,
     swipeAngle = null,
-    swipeDirection = null;
-    fingerMoved = false;
+    swipeDirection = null,
+    timer = null,
+    idle = null,
+    stopAutoSlideFlag = 0,
+
+    startupTime = 20000,
+    slideInterval = 5000,
+    idleTime = 10000;
 
 
 /**
  * Activates the main program logic.
  */
 function initialize() {
+
     document.addEventListener('keydown', onDocumentKeyDown, false);
     //document.addEventListener('touchstart', onDocumentTouchStart, false);
     document.addEventListener('touchstart', touchStart, false);
@@ -250,18 +244,14 @@ function determineSwipeDirection() {
 }
 
 function processingRoutine() {
+    if (!stopAutoSlideFlag) stopAutoSlide();
+    idleTimer();
     var swipedElement = document.getElementById(triggerElementID);
-    var slides = Array.prototype.slice.call( document.querySelectorAll( '#main>section' ) );
-    var end = 0;
+
     if ( swipeDirection == 'left' ) {
-        if ( indexh == slides.length - 1) {
-            indexh = 0;
-            end = 1;
-        }
-        navigateRight( end );
+        navigateRight();
 
     } else if ( swipeDirection == 'right' ) {
-        if (!indexh) indexh = slides.length;
         navigateLeft();
 
     } else if ( swipeDirection == 'up' ) {
@@ -380,11 +370,19 @@ function navigateTo( h, v ) {
 }
 
 function navigateLeft() {
+    var slides = Array.prototype.slice.call( document.querySelectorAll( '#main>section' ) );
+    if (!indexh) indexh = slides.length;
     indexh --;
     indexv = 0;
     slide();
 }
-function navigateRight( end ) {
+function navigateRight() {
+    var slides = Array.prototype.slice.call( document.querySelectorAll( '#main>section' ) );
+    var end = 0;
+    if ( indexh == slides.length - 1) {
+        indexh = 0;
+        end = 1;
+    }
     if ( !end ) indexh ++;
     indexv = 0;
     slide();
@@ -398,7 +396,26 @@ function navigateDown() {
     slide();
 }
 
+function slideTimer() {
+    timer = setTimeout("slideTimer()", slideInterval);
+    navigateRight();
+}
+function startAutoSlide() {
+    clearTimeout(timer);
+    stopAutoSlideFlag = 0;
+    slideTimer();
+}
+function stopAutoSlide() {
+    clearTimeout(timer);
+}
+function idleTimer() {
+        stopAutoSlideFlag = 1;
+        clearTimeout(idle);
+        idle = setTimeout("startAutoSlide();", idleTime);
+}
+
 // Initialize the program. Done right before returning to ensure
 // that any inline variable definitions are available to all
 // functions
 initialize();
+setTimeout("startAutoSlide()", startupTime);

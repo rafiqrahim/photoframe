@@ -19,4 +19,4 @@ def slide(request):
         b = '/'.join(piclist[i].replace('/','\\').rsplit('\\')[-4:]).encode('utf8')
         c = '/'.join(piclist[i].replace('/','\\').rsplit('\\')[-1:]).rsplit('.')[0].encode('utf8')
         sec = sec + "<section><h3>" + c + "</h3><img src='" + b + "'></section>"
-    return render_to_response('index.html',locals())
+    return render_to_response('section.html',locals())

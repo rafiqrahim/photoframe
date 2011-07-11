@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block section %}
+    <section>
+        <h2>Intergalactic Interconnections</h2>
+        <p>
+            You can link between slides internally,<br/>
+            <a href="#/2">like this</a>.
+        </p>
+    </section>
+
+
+    <section>
+        <section>
+            <h3>{{ name }}</h3>
+            <img src="{{ pic }}">
+        </section>
+        <section>
+
+        </section>
+    </section>
+    {% autoescape off %}
+    {{ sec }}
+    {% endautoescape %}
+    </div>
+{% endblock %}
