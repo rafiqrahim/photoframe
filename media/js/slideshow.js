@@ -63,8 +63,8 @@ var indexh = 0,
     stopAutoSlideFlag = 0,
 
     startupTime = 20000,
-    slideInterval = 5000,
-    idleTime = 10000;
+    slideInterval = 30000,
+    idleTime = 30000;
 
 
 /**
@@ -244,6 +244,7 @@ function determineSwipeDirection() {
 }
 
 function processingRoutine() {
+    clearTimeout(startslide);
     if (!stopAutoSlideFlag) stopAutoSlide();
     idleTimer();
     var swipedElement = document.getElementById(triggerElementID);
@@ -392,7 +393,9 @@ function navigateUp() {
     slide();
 }
 function navigateDown() {
-    indexv ++;
+    indexh = 0;
+    indexv = 1;
+    //indexv ++;
     slide();
 }
 
@@ -411,6 +414,7 @@ function stopAutoSlide() {
 function idleTimer() {
         stopAutoSlideFlag = 1;
         clearTimeout(idle);
+        clearTimeout(timer);
         idle = setTimeout("startAutoSlide();", idleTime);
 }
 
@@ -418,4 +422,4 @@ function idleTimer() {
 // that any inline variable definitions are available to all
 // functions
 initialize();
-setTimeout("startAutoSlide()", startupTime);
+var startslide = setTimeout("startAutoSlide()", startupTime);

@@ -1,34 +1,37 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
 	
 	<head>
+
 		<meta charset="utf-8">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		
-		<title>CSS 3D Slideshow</title>
-		
-		<link href='http://fonts.googleapis.com/css?family=Crimson+Text:regular,600,bold' rel='stylesheet' type='text/css'>
-		
+		<title>Twitter Meter</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Crimson+Text:regular,600,bold' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="media/css/reset.css">
 		<link rel="stylesheet" href="media/css/main.css">
-		<script type="text/JavaScript">
-<!--
-function timedRefresh(timeoutPeriod) {
-	setTimeout("location.reload(true);",timeoutPeriod);
-}
-//   -->
-</script>
+
+        <script type="text/JavaScript">
+            function timedRefresh(timeoutPeriod) {
+                setTimeout("location.reload(true);",timeoutPeriod);
+            }
+        </script>
+
 	</head>
 	
 	<body onload="JavaScript:timedRefresh(3600000);">
-		<!-- Any section element inside of this container is displayed as a slide -->
+
 
 		<div id="main">
-			
-            {% block section %}{% endblock %}
-		
+
+            {% include "content.html" %}
+            {% include "section.html" %}
+         </div>
+
 		<script src="media/js/slideshow.js"></script>
 		
 	</body>
+
 </html>

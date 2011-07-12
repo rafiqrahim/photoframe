@@ -1,7 +1,11 @@
-/**
- * @author Hakim El Hattab
- */
+/*********************************************
+ * TABLE STYLES
+ *********************************************/
 
+table, td {
+    text-align: center;
+    padding: 10px 0px 10px 35px;
+}
 
 /*********************************************
  * FONT-FACE DEFINITIONS
